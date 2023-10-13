@@ -25,6 +25,7 @@ import {CollectionType} from "./enums/CollectionType.sol";
  *       to verify if the recipient is a contract as it requires verifying the receiver interface is valid.
  * @author LooksRare protocol team (👀,💎)
  */
+// TODO Needs to be updated to split a fraction and transfer the new fraction to the bidder
 contract TransferManager is ITransferManager, LowLevelERC721Transfer, LowLevelERC1155Transfer, OwnableTwoSteps {
     /**
      * @notice This returns whether the user has approved the operator address.

@@ -34,6 +34,7 @@ import {BaseStrategy, IStrategy} from "../BaseStrategy.sol";
  *         The bidder can only bid on 1 token id at a time and the amount must be 1.
  * @author LooksRare protocol team (👀,💎)
  */
+// TODO can be dismissed as it's ERC721 only
 contract StrategyReservoirCollectionOffer is BaseStrategy {
     /**
      * @notice Reservoir's oracle address.

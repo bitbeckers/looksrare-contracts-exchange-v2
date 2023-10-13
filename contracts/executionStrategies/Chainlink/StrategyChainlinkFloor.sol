@@ -31,6 +31,7 @@ import {ONE_HUNDRED_PERCENT_IN_BP} from "../../constants/NumericConstants.sol";
  *         is 1.
  * @author LooksRare protocol team (👀,💎)
  */
+//TODO we could/should leave this out of scope for now since it implies setting up price feeds
 contract StrategyChainlinkFloor is BaseStrategy, BaseStrategyChainlinkMultiplePriceFeeds {
     /**
      * @notice Wrapped ether (WETH) address.

@@ -17,6 +17,7 @@ import {CollectionType} from "./enums/CollectionType.sol";
  * @notice This contract handles the logic for transferring non-fungible items.
  * @author LooksRare protocol team (👀,💎)
  */
+// TODO Needs to be updated to split a fraction and transfer the new fraction to the bidder
 contract TransferSelectorNFT is ExecutionManager, PackableReentrancyGuard {
     /**
      * @notice Transfer manager for ERC721 and ERC1155.

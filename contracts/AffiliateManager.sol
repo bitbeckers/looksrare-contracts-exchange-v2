@@ -15,6 +15,7 @@ import {ONE_HUNDRED_PERCENT_IN_BP} from "./constants/NumericConstants.sol";
  * @notice This contract handles the management of affiliates for the LooksRare protocol.
  * @author LooksRare protocol team (👀,💎)
  */
+// TODO can probably be removed
 contract AffiliateManager is IAffiliateManager, OwnableTwoSteps {
     /**
      * @notice Whether the affiliate program is active.
