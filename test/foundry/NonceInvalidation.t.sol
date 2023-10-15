@@ -122,7 +122,7 @@ contract NonceInvalidationTest is INonceManager, ProtocolBase {
         uint256 quasiRandomNumber = 54570651553685478358117286254199992264;
         vm.assume(userGlobalBidNonce < quasiRandomNumber);
         // Change block number
-        vm.roll(1);
+        vm.roll(2);
         assertEq(quasiRandomNumber, uint256(blockhash(block.number - 1) >> 128));
 
         uint256 newBidNonce = 0 + quasiRandomNumber;

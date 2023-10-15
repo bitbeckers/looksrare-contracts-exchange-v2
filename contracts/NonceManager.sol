@@ -5,6 +5,8 @@ pragma solidity 0.8.17;
 import {INonceManager} from "./interfaces/INonceManager.sol";
 import {LengthsInvalid} from "./errors/SharedErrors.sol";
 
+import "forge-std/console.sol";
+
 /**
  * @title NonceManager
  * @notice This contract handles the nonce logic that is used for invalidating maker orders that exist off-chain.
@@ -100,14 +102,18 @@ contract NonceManager is INonceManager {
         uint256 newBidNonce = userBidAskNonces[msg.sender].bidNonce;
         uint256 newAskNonce = userBidAskNonces[msg.sender].askNonce;
 
+        console.log("Got quasi random number %s", quasiRandomNumber);
+
         if (bid) {
             newBidNonce += quasiRandomNumber;
             userBidAskNonces[msg.sender].bidNonce = newBidNonce;
+            console.log("Created new BidNonce %s", newBidNonce);
         }
 
         if (ask) {
             newAskNonce += quasiRandomNumber;
             userBidAskNonces[msg.sender].askNonce = newAskNonce;
+            console.log("Created new AskNonce %s", newBidNonce);
         }
 
         emit NewBidAskNonces(msg.sender, newBidNonce, newAskNonce);
