@@ -77,6 +77,13 @@ contract NonceInvalidationTest is INonceManager, ProtocolBase {
         uint256 newAskNonce = 0 + quasiRandomNumber;
 
         vm.prank(makerUser);
+
+        // ├─ emit NewBidAskNonces(user: 0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf, bidNonce: 0, askNonce: 54570651553685478358117286254199992264 [5.457e37])
+        // ├─ [6775] LooksRareProtocol::incrementBidAskNonces(false, true)
+        // │   ├─ emit NewBidAskNonces(user: 0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf, bidNonce: 0, askNonce: 0)
+        // │   └─ ← ()
+        // └─ ← "Log != expected log"
+
         vm.expectEmit({checkTopic1: false, checkTopic2: false, checkTopic3: false, checkData: true});
         emit NewBidAskNonces(makerUser, 0, newAskNonce);
         looksRareProtocol.incrementBidAskNonces(false, true);
@@ -115,12 +122,18 @@ contract NonceInvalidationTest is INonceManager, ProtocolBase {
         uint256 quasiRandomNumber = 54570651553685478358117286254199992264;
         vm.assume(userGlobalBidNonce < quasiRandomNumber);
         // Change block number
-        vm.roll(1);
+        vm.roll(2);
         assertEq(quasiRandomNumber, uint256(blockhash(block.number - 1) >> 128));
 
         uint256 newBidNonce = 0 + quasiRandomNumber;
 
         vm.prank(makerUser);
+
+        // ├─ emit NewBidAskNonces(user: 0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf, bidNonce: 54570651553685478358117286254199992264 [5.457e37], askNonce: 0)
+        // ├─ [6769] LooksRareProtocol::incrementBidAskNonces(true, false)
+        // │   ├─ emit NewBidAskNonces(user: 0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf, bidNonce: 0, askNonce: 0)
+        // │   └─ ← ()
+        // └─ ← "Log != expected log"
         vm.expectEmit({checkTopic1: false, checkTopic2: false, checkTopic3: false, checkData: true});
         emit NewBidAskNonces(makerUser, newBidNonce, 0);
         looksRareProtocol.incrementBidAskNonces(true, false);
