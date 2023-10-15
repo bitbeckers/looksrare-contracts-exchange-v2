@@ -28,6 +28,7 @@ import {BaseStrategy, IStrategy} from "./BaseStrategy.sol";
  * @dev Use cases can include trait-based offers or rarity score offers.
  * @author LooksRare protocol team (👀,💎)
  */
+// TODO This allows for a buyer to declare a set of items they're willing to buy in a merkle tree
 contract StrategyCollectionOffer is BaseStrategy {
     /**
      * @notice This function validates the order under the context of the chosen strategy and

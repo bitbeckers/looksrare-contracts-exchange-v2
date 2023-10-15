@@ -5,6 +5,7 @@ pragma solidity 0.8.17;
  * @title IAffiliateManager
  * @author LooksRare protocol team (👀,💎)
  */
+//TODO this can go since probably
 interface IAffiliateManager {
     /**
      * @notice It is emitted when there is an update of affliate controller.

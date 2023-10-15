@@ -15,6 +15,7 @@ import {PriceFeedAlreadySet, DecimalsInvalid} from "../../errors/ChainlinkErrors
  * @notice This contract allows a strategy to store Chainlink price feeds for price retrieval.
  * @author LooksRare protocol team (👀,💎)
  */
+//TODO we could/should leave this out of scope for now since it implies setting up price feeds
 contract BaseStrategyChainlinkMultiplePriceFeeds is BaseStrategyChainlinkPriceLatency {
     /**
      * @notice This maps the collection address to a Chainlink price feed address.
