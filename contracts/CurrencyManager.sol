@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
+// LooksRare unopinionated libraries
+import {OwnableTwoSteps} from "@looksrare/contracts-libs/contracts/OwnableTwoSteps.sol";
+
 // Interfaces
 import {ICurrencyManager} from "./interfaces/ICurrencyManager.sol";
-
-// Dependencies
-import {AffiliateManager} from "./AffiliateManager.sol";
 
 /**
  * @title CurrencyManager
  * @notice This contract manages the list of valid fungible currencies.
  * @author LooksRare protocol team (👀,💎)
  */
-contract CurrencyManager is ICurrencyManager, AffiliateManager {
+contract CurrencyManager is ICurrencyManager, OwnableTwoSteps {
     /**
      * @notice It checks whether the currency is allowed for transacting.
      */
@@ -22,7 +22,7 @@ contract CurrencyManager is ICurrencyManager, AffiliateManager {
      * @notice Constructor
      * @param _owner Owner address
      */
-    constructor(address _owner) AffiliateManager(_owner) {}
+    constructor(address _owner) OwnableTwoSteps(_owner) {}
 
     /**
      * @notice This function allows the owner to update the status of a currency.

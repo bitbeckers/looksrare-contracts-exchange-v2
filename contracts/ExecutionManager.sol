@@ -38,6 +38,7 @@ contract ExecutionManager is InheritedStrategy, NonceManager, StrategyManager, I
     /**
      * @notice Maximum creator fee (in basis point).
      */
+    // TODO do we need a max? Is 1% max fair?
     uint16 public maxCreatorFeeBp = 1_000;
 
     /**

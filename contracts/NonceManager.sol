@@ -15,6 +15,7 @@ import {LengthsInvalid} from "./errors/SharedErrors.sol";
  *         Only the order nonce is invalidated at the time of the execution of a maker order that contains it.
  * @author LooksRare protocol team (👀,💎)
  */
+// TODO this allows for cancelling signed orders
 contract NonceManager is INonceManager {
     /**
      * @notice Magic value nonce returned if executed (or cancelled).

@@ -25,6 +25,7 @@ import {CollectionType} from "./enums/CollectionType.sol";
  *       to verify if the recipient is a contract as it requires verifying the receiver interface is valid.
  * @author LooksRare protocol team (👀,💎)
  */
+// TODO Needs to be updated to split a fraction and transfer the new fraction to the bidder
 contract TransferManager is ITransferManager, LowLevelERC721Transfer, LowLevelERC1155Transfer, OwnableTwoSteps {
     /**
      * @notice This returns whether the user has approved the operator address.
@@ -86,6 +87,92 @@ contract TransferManager is ITransferManager, LowLevelERC721Transfer, LowLevelER
      * @dev It does not allow batch transferring if from = msg.sender since native function should be used.
      */
     function transferItemsERC1155(
+        address collection,
+        address from,
+        address to,
+        uint256[] calldata itemIds,
+        uint256[] calldata amounts
+    ) external {
+        uint256 length = itemIds.length;
+
+        if (length == 0 || amounts.length != length) {
+            revert LengthsInvalid();
+        }
+
+        _isOperatorValidForTransfer(from, msg.sender);
+
+        if (length == 1) {
+            if (amounts[0] == 0) {
+                revert AmountInvalid();
+            }
+            _executeERC1155SafeTransferFrom(collection, from, to, itemIds[0], amounts[0]);
+        } else {
+            for (uint256 i; i < length; ) {
+                if (amounts[i] == 0) {
+                    revert AmountInvalid();
+                }
+
+                unchecked {
+                    ++i;
+                }
+            }
+            _executeERC1155SafeBatchTransferFrom(collection, from, to, itemIds, amounts);
+        }
+    }
+
+    /**
+     * @notice This function transfers items for a single Hypercert.
+     * @param collection Collection address
+     * @param from Sender address
+     * @param to Recipient address
+     * @param itemIds Array of itemIds
+     * @param amounts Array of amounts
+     * @dev It does not allow batch transferring if from = msg.sender since native function should be used.
+     */
+    function transferItemsHypercert(
+        address collection,
+        address from,
+        address to,
+        uint256[] calldata itemIds,
+        uint256[] calldata amounts
+    ) external {
+        uint256 length = itemIds.length;
+
+        if (length == 0 || amounts.length != length) {
+            revert LengthsInvalid();
+        }
+
+        _isOperatorValidForTransfer(from, msg.sender);
+
+        if (length == 1) {
+            if (amounts[0] == 0) {
+                revert AmountInvalid();
+            }
+            _executeERC1155SafeTransferFrom(collection, from, to, itemIds[0], amounts[0]);
+        } else {
+            for (uint256 i; i < length; ) {
+                if (amounts[i] == 0) {
+                    revert AmountInvalid();
+                }
+
+                unchecked {
+                    ++i;
+                }
+            }
+            _executeERC1155SafeBatchTransferFrom(collection, from, to, itemIds, amounts);
+        }
+    }
+
+    /**
+     * @notice This function transfers items for a single Hyperboard.
+     * @param collection Collection address
+     * @param from Sender address
+     * @param to Recipient address
+     * @param itemIds Array of itemIds
+     * @param amounts Array of amounts
+     * @dev It does not allow batch transferring if from = msg.sender since native function should be used.
+     */
+    function transferItemsHyperboard(
         address collection,
         address from,
         address to,

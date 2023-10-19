@@ -193,7 +193,7 @@ contract LooksRareProtocolTest is ProtocolBase {
         vm.expectEmit({checkTopic1: true, checkTopic2: false, checkTopic3: false, checkData: true});
         emit NewGasLimitETHTransfer(10_000);
         looksRareProtocol.updateETHGasLimitForTransfer(10_000);
-        assertEq(uint256(vm.load(address(looksRareProtocol), bytes32(uint256(14)))), 10_000);
+        assertEq(uint256(vm.load(address(looksRareProtocol), bytes32(uint256(12)))), 10_000);
     }
 
     function testUpdateETHGasLimitForTransferRevertsIfTooLow() public asPrankedUser(_owner) {
@@ -202,7 +202,7 @@ contract LooksRareProtocolTest is ProtocolBase {
         looksRareProtocol.updateETHGasLimitForTransfer(newGasLimitETHTransfer - 1);
 
         looksRareProtocol.updateETHGasLimitForTransfer(newGasLimitETHTransfer);
-        assertEq(uint256(vm.load(address(looksRareProtocol), bytes32(uint256(14)))), newGasLimitETHTransfer);
+        assertEq(uint256(vm.load(address(looksRareProtocol), bytes32(uint256(12)))), newGasLimitETHTransfer);
     }
 
     function testUpdateETHGasLimitForTransferNotOwner() public {

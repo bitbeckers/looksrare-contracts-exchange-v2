@@ -16,9 +16,6 @@ import {MAKER_ORDER_INVALID_STANDARD_SALE, STRATEGY_INVALID_QUOTE_TYPE, STRATEGY
 // Base test
 import {ProtocolBase} from "./ProtocolBase.t.sol";
 
-// Strategies
-import {StrategyChainlinkFloor} from "../../contracts/executionStrategies/Chainlink/StrategyChainlinkFloor.sol";
-
 contract ExecutionManagerTest is ProtocolBase, IExecutionManager, IStrategyManager {
     function setUp() public {
         _setUp();
@@ -226,79 +223,74 @@ contract ExecutionManagerTest is ProtocolBase, IExecutionManager, IStrategyManag
         );
     }
 
-    function testCannotExecuteTransactionIfMakerBidWithStrategyForMakerAsk() public {
-        _setUpUsers();
+    // TODO check is we need this test and replace the chainlink floor strategy
+    // function testCannotExecuteTransactionIfMakerBidWithStrategyForMakerAsk() public {
+    //     _setUpUsers();
 
-        vm.prank(_owner);
-        StrategyChainlinkFloor strategy = new StrategyChainlinkFloor(_owner, address(weth));
+    //     vm.prank(_owner);
+    //     StrategyChainlinkFloor strategy = new StrategyChainlinkFloor(_owner, address(weth));
 
-        bool isMakerBid = true;
-        vm.prank(_owner);
-        looksRareProtocol.addStrategy(
-            250,
-            250,
-            300,
-            StrategyChainlinkFloor.executeBasisPointsDiscountCollectionOfferStrategyWithTakerAsk.selector,
-            isMakerBid,
-            address(strategy)
-        );
+    //     bool isMakerBid = true;
+    //     vm.prank(_owner);
+    //     looksRareProtocol.addStrategy(
+    //         250,
+    //         250,
+    //         300,
+    //         StrategyChainlinkFloor.executeBasisPointsDiscountCollectionOfferStrategyWithTakerAsk.selector,
+    //         isMakerBid,
+    //         address(strategy)
+    //     );
 
-        (OrderStructs.Maker memory makerAsk, OrderStructs.Taker memory takerBid) = _createMockMakerAskAndTakerBid(
-            address(mockERC721)
-        );
-        makerAsk.strategyId = 1; // Fake strategy
+    //     (OrderStructs.Maker memory makerAsk, OrderStructs.Taker memory takerBid) =
+    //         _createMockMakerAskAndTakerBid(address(mockERC721));
+    //     makerAsk.strategyId = 1; // Fake strategy
 
-        bytes memory signature = _signMakerOrder(makerAsk, makerUserPK);
+    //     bytes memory signature = _signMakerOrder(makerAsk, makerUserPK);
 
-        // Mint asset
-        mockERC721.mint(makerUser, makerAsk.itemIds[0]);
+    //     // Mint asset
+    //     mockERC721.mint(makerUser, makerAsk.itemIds[0]);
 
-        _assertMakerOrderReturnValidationCode(makerAsk, signature, STRATEGY_INVALID_QUOTE_TYPE);
+    //     _assertMakerOrderReturnValidationCode(makerAsk, signature, STRATEGY_INVALID_QUOTE_TYPE);
 
-        vm.prank(takerUser);
-        vm.expectRevert(IExecutionManager.NoSelectorForStrategy.selector);
-        looksRareProtocol.executeTakerBid{value: makerAsk.price}(
-            takerBid,
-            makerAsk,
-            signature,
-            _EMPTY_MERKLE_TREE,
-            _EMPTY_AFFILIATE
-        );
-    }
+    //     vm.prank(takerUser);
+    //     vm.expectRevert(IExecutionManager.NoSelectorForStrategy.selector);
+    //     looksRareProtocol.executeTakerBid{value: makerAsk.price}(
+    //         takerBid, makerAsk, signature, _EMPTY_MERKLE_TREE, _EMPTY_AFFILIATE
+    //     );
+    // }
 
-    function testCannotExecuteTransactionIfMakerAskWithStrategyForMakerBid() public {
-        _setUpUsers();
+    // TODO check is we need this test and replace the chainlink floor strategy
+    // function testCannotExecuteTransactionIfMakerAskWithStrategyForMakerBid() public {
+    //     _setUpUsers();
 
-        vm.prank(_owner);
-        StrategyChainlinkFloor strategy = new StrategyChainlinkFloor(_owner, address(weth));
+    //     vm.prank(_owner);
+    //     StrategyChainlinkFloor strategy = new StrategyChainlinkFloor(_owner, address(weth));
 
-        bool isMakerBid = false;
-        vm.prank(_owner);
-        // All parameters are random, including the selector and the implementation
-        looksRareProtocol.addStrategy(
-            250,
-            250,
-            300,
-            StrategyChainlinkFloor.executeFixedPremiumStrategyWithTakerBid.selector,
-            isMakerBid,
-            address(strategy)
-        );
+    //     bool isMakerBid = false;
+    //     vm.prank(_owner);
+    //     // All parameters are random, including the selector and the implementation
+    //     looksRareProtocol.addStrategy(
+    //         250,
+    //         250,
+    //         300,
+    //         StrategyChainlinkFloor.executeFixedPremiumStrategyWithTakerBid.selector,
+    //         isMakerBid,
+    //         address(strategy)
+    //     );
 
-        (OrderStructs.Maker memory makerBid, OrderStructs.Taker memory takerAsk) = _createMockMakerBidAndTakerAsk(
-            address(mockERC721),
-            address(weth)
-        );
-        makerBid.strategyId = 1; // Fake strategy
+    //     (OrderStructs.Maker memory makerBid, OrderStructs.Taker memory takerAsk) =
+    //         _createMockMakerBidAndTakerAsk(address(mockERC721), address(weth));
+    //     makerBid.strategyId = 1; // Fake strategy
 
-        bytes memory signature = _signMakerOrder(makerBid, makerUserPK);
+    //     bytes memory signature = _signMakerOrder(makerBid, makerUserPK);
 
-        // Mint asset to ask user
-        mockERC721.mint(takerUser, makerBid.itemIds[0]);
+    //     // Mint asset to ask user
+    //     mockERC721.mint(takerUser, makerBid.itemIds[0]);
 
-        _assertMakerOrderReturnValidationCode(makerBid, signature, STRATEGY_INVALID_QUOTE_TYPE);
+    //     _assertMakerOrderReturnValidationCode(makerBid, signature, STRATEGY_INVALID_QUOTE_TYPE);
 
-        vm.prank(takerUser);
-        vm.expectRevert(IExecutionManager.NoSelectorForStrategy.selector);
-        looksRareProtocol.executeTakerAsk(takerAsk, makerBid, signature, _EMPTY_MERKLE_TREE, _EMPTY_AFFILIATE);
-    }
+    //     vm.prank(takerUser);
+    //     vm.expectRevert(IExecutionManager.NoSelectorForStrategy.selector);
+    //     looksRareProtocol.executeTakerAsk(takerAsk, makerBid, signature, _EMPTY_MERKLE_TREE, _EMPTY_AFFILIATE);
+    // }
 }

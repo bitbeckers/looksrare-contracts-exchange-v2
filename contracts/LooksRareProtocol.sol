@@ -34,39 +34,43 @@ import {QuoteType} from "./enums/QuoteType.sol";
  * @notice This contract is the core smart contract of the LooksRare protocol ("v2").
  *         It is the main entry point for users to initiate transactions with taker orders
  *         and manage the cancellation of maker orders, which exist off-chain.
-LOOKSRARELOOKSRARELOOKSRLOOKSRARELOOKSRARELOOKSRARELOOKSRARELOOKSRLOOKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOKSRAR'''''''''''''''''''''''''''''''''''OOKSRLOOKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOKS:.                                        .;OOKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOO,.                                            .,KSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRAREL'                ..',;:LOOKS::;,'..                'RARELOOKSRARELOOKSR
-LOOKSRARELOOKSRAR.              .,:LOOKSRARELOOKSRARELO:,.              .RELOOKSRARELOOKSR
-LOOKSRARELOOKS:.             .;RARELOOKSRARELOOKSRARELOOKSl;.             .:OOKSRARELOOKSR
-LOOKSRARELOO;.            .'OKSRARELOOKSRARELOOKSRARELOOKSRARE'.            .;KSRARELOOKSR
-LOOKSRAREL,.            .,LOOKSRARELOOK:;;:"""":;;;lELOOKSRARELO,.            .,RARELOOKSR
-LOOKSRAR.             .;okLOOKSRAREx:.              .;OOKSRARELOOK;.             .RELOOKSR
-LOOKS:.             .:dOOOLOOKSRARE'      .''''..     .OKSRARELOOKSR:.             .LOOKSR
-LOx;.             .cKSRARELOOKSRAR'     'LOOKSRAR'     .KSRARELOOKSRARc..            .OKSR
-L;.             .cxOKSRARELOOKSRAR.    .LOOKS.RARE'     ;kRARELOOKSRARExc.             .;R
-LO'             .;oOKSRARELOOKSRAl.    .LOOKS.RARE.     :kRARELOOKSRAREo;.             'SR
-LOOK;.            .,KSRARELOOKSRAx,     .;LOOKSR;.     .oSRARELOOKSRAo,.            .;OKSR
-LOOKSk:.            .'RARELOOKSRARd;.      ....       'oOOOOOOOOOOxc'.            .:LOOKSR
-LOOKSRARc.             .:dLOOKSRAREko;.            .,lxOOOOOOOOOd:.             .ARELOOKSR
-LOOKSRARELo'             .;oOKSRARELOOxoc;,....,;:ldkOOOOOOOOkd;.             'SRARELOOKSR
-LOOKSRARELOOd,.            .,lSRARELOOKSRARELOOKSRARELOOKSRkl,.            .,OKSRARELOOKSR
-LOOKSRARELOOKSx;.            ..;oxELOOKSRARELOOKSRARELOkxl:..            .:LOOKSRARELOOKSR
-LOOKSRARELOOKSRARc.              .':cOKSRARELOOKSRALOc;'.              .ARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELl'                 ...'',,,,''...                 'SRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOo,.                                          .,OKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOKSx;.                                      .;xOOKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOKSRLO:.                                  .:SRLOOKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOKSRLOOKl.                              .lOKSRLOOKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOKSRLOOKSRo'.                        .'oWENV2?LOOKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOKSRLOOKSRARd;.                    .;xRELOOKSRLOOKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOKSRLOOKSRARELO:.                .:kRARELOOKSRLOOKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOKSRLOOKSRARELOOKl.            .cOKSRARELOOKSRLOOKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOKSRLOOKSRARELOOKSRo'        'oLOOKSRARELOOKSRLOOKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOKSRLOOKSRARELOOKSRARE,.  .,dRELOOKSRARELOOKSRLOOKSRARELOOKSRARELOOKSR
-LOOKSRARELOOKSRARELOOKSRLOOKSRARELOOKSRARELOOKSRARELOOKSRARELOOKSRLOOKSRARELOOKSRARELOOKSR
+ *                                                ~~~~~~
+ *                                              ~~~~  ~~~~
+ *                                             ~~~      ~~~
+ *                                            ~~~        ~~~
+ *                                           ~~~          ~~~
+ *                      ~~~~~~~~~           ~~~            ~~~           ~~~~~~~~~
+ *                     ~~~    ~~~~~~~~~   ~~~~              ~~~~   ~~~~~~~~~    ~~~
+ *                     ~~~           ~~~~~~~                  ~~~~~~~           ~~~
+ *                     ~~~-                      ~~~~~~~~                      ~~~~
+ *                      ~~~                    ~~~~    ~~~~                    ~~~
+ *                       ~~~         ~~~~~~~~~~~~        ~~~~~~~~~~~~         ~~~
+ *                        ~~~      ~~~~~~~~~~~              ~~~~~~~~~~~      ~~~
+ *                        ~~~      ~~~                              ~~~     ~~~
+ *                         ~~~     ~~~          ~~~~~~~~~~          ~~~     ~~~
+ *                      ~~~~~      ~~~      ~~~~~~      ~~~~~~      ~~~      ~~~~~
+ *                 ~~~~~~~        ~~~      ~~~              ~~~      ~~~        ~~~~~~~
+ *             ~~~~~~           ~~~~      ~~~                ~~~      ~~~~           ~~~~~~
+ *           ~~~~             ~~~        ~~~                  ~~~        ~~~             ~~~~
+ *          ~~~              ~~~         ~~~                  ~~~         ~~~              ~~~
+ *           ~~~~             ~~~        ~~~                  ~~~        ~~~             ~~~~
+ *             ~~~~~~           ~~~~      ~~~                ~~~      ~~~~~          ~~~~~~
+ *                 ~~~~~~~        ~~~      ~~~              ~~~      ~~~        ~~~~~~~
+ *                      ~~~~~      ~~~      ~~~~~~      ~~~~~~      ~~~      ~~~~~
+ *                         ~~~     ~~~          ~~~~~~~~~~          ~~~     ~~~
+ *                         ~~      ~~~                              ~~~     ~~~
+ *                        ~~~      ~~~~~~~~~~~              ~~~~~~~~~~~      ~~~
+ *                       ~~~         ~~~~~~~~~~~~        ~~~~~~~~~~~~         ~~~
+ *                      ~~~                    ~~~~    ~~~~                    ~~~
+ *                     ~~~~                      ~~~~~~~~                      ~~~~
+ *                     ~~~           ~~~~~~~                  ~~~~~~~           ~~~
+ *                     ~~~     ~~~~~~~~   ~~~~              ~~~~   ~~~~~~~~     ~~~
+ *                      ~~~~~~~~~           ~~~            ~~~           ~~~~~~~~~
+ *                                           ~~~          ~~~
+ *                                            ~~~        ~~~
+ *                                             ~~~      ~~~
+ *                                              ~~~~  ~~~~
+ *                                                ~~~~~~
  * @author LooksRare protocol team (👀,💎)
  */
 contract LooksRareProtocol is
@@ -479,29 +483,6 @@ contract LooksRareProtocol is
         uint256 totalProtocolFeeAmount
     ) internal {
         if (totalProtocolFeeAmount != 0) {
-            if (affiliate != address(0)) {
-                // Check whether affiliate program is active and whether to execute a affiliate logic
-                // If so, it adjusts the protocol fee downward.
-                if (isAffiliateProgramActive) {
-                    uint256 totalAffiliateFeeAmount = (totalProtocolFeeAmount * affiliateRates[affiliate]) /
-                        ONE_HUNDRED_PERCENT_IN_BP;
-
-                    if (totalAffiliateFeeAmount != 0) {
-                        totalProtocolFeeAmount -= totalAffiliateFeeAmount;
-
-                        // If bid user isn't the affiliate, pay the affiliate.
-                        // If currency is ETH, funds are returned to sender at the end of the execution.
-                        // If currency is ERC20, funds are not transferred from bidder to bidder
-                        // (since it uses transferFrom).
-                        if (bidUser != affiliate) {
-                            _transferFungibleTokens(currency, bidUser, affiliate, totalAffiliateFeeAmount);
-                        }
-
-                        emit AffiliatePayment(affiliate, currency, totalAffiliateFeeAmount);
-                    }
-                }
-            }
-
             // Transfer remaining protocol fee to the protocol fee recipient
             _transferFungibleTokens(currency, bidUser, protocolFeeRecipient, totalProtocolFeeAmount);
         }
